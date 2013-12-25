@@ -26,7 +26,7 @@ You can easily install the package from PyPI_ by using :program:`pip` or
 .. _PyPI: http://pypi.python.org/pypi/pghstore
 
 """
-from __future__ import absolute_import
+
 
 from .version import VERSION
 try:

@@ -1,8 +1,9 @@
 import re
+import collections
 try:
-    import cStringIO as StringIO
+    import io as StringIO
 except ImportError:
-    import StringIO
+    import io
 
 
 def dumps(obj, key_map=None, value_map=None, encoding='utf-8',
@@ -142,34 +143,34 @@ def dump(obj, file, key_map=None, value_map=None, encoding='utf-8'):
     :param encoding: a string encode to use
 
     """
-    if callable(getattr(obj, 'iteritems', None)):
-        items = obj.iteritems()
-    elif callable(getattr(obj, 'items', None)):
-        items = obj.items()
-    elif callable(getattr(obj, '__iter__', None)):
+    if isinstance(getattr(obj, 'iteritems', None), collections.Callable):
+        items = iter(obj.items())
+    elif isinstance(getattr(obj, 'items', None), collections.Callable):
+        items = list(obj.items())
+    elif isinstance(getattr(obj, '__iter__', None), collections.Callable):
         items = iter(obj)
     else:
         raise TypeError('expected a mapping object, not ' + type(obj).__name__)
     if key_map is None:
         def key_map(key):
             raise TypeError('key %r is not a string' % key)
-    elif not callable(key_map):
+    elif not isinstance(key_map, collections.Callable):
         raise TypeError('key_map must be callable')
-    elif not (value_map is None or callable(value_map)):
+    elif not (value_map is None or isinstance(value_map, collections.Callable)):
         raise TypeError('value_map must be callable')
     write = getattr(file, 'write', None)
-    if not callable(write):
+    if not isinstance(write, collections.Callable):
         raise TypeError('file must be a wrtiable file object that implements '
                         'write() method')
     first = True
     for key, value in items:
-        if not isinstance(key, basestring):
+        if not isinstance(key, str):
             key = key_map(key)
         elif not isinstance(key, str):
             key = key.encode(encoding)
         if value is None:
             value = None
-        elif not isinstance(value, basestring):
+        elif not isinstance(value, str):
             if value_map is None:
                 raise TypeError('value %r of key %r is not a string' %
                                 (value, key))
@@ -196,7 +197,7 @@ def load(file, encoding='utf-8'):
 
     """
     read = getattr(file, 'read', None)
-    if not callable(read):
+    if not isinstance(read, collections.Callable):
         raise TypeError('file must be a readable file object that implements '
                         'read() method')
     return load(read(), encoding=encoding)

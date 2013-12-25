@@ -25,5 +25,5 @@ __doc__ = __doc__.replace('0.9.2', VERSION)
 
 
 if __name__ == '__main__':
-    print VERSION
+    print(VERSION)
 

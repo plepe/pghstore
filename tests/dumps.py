@@ -5,7 +5,7 @@ import pghstore
 class DumpsTests(unittest.TestCase):
     def assertDumpsMatchesDict(self, s, d):
         pairs = ['"%s"=>%s' % (key, ('"%s"' % value if value is not None else "NULL"))\
-                     for key, value in d.iteritems()]
+                     for key, value in d.items()]
         for pair in pairs:
             self.assertTrue(pair in s)
         self.assertEqual(len(",".join(pairs)), len(s))

@@ -50,8 +50,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'pghstore'
-copyright = u'2011, Hong Minhee'
+project = 'pghstore'
+copyright = '2011, Hong Minhee'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -199,8 +199,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'pghstore.tex', u'pghstore Documentation',
-   u'Hong Minhee', 'manual'),
+  ('index', 'pghstore.tex', 'pghstore Documentation',
+   'Hong Minhee', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -229,8 +229,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'pghstore', u'pghstore Documentation',
-     [u'Hong Minhee'], 1)
+    ('index', 'pghstore', 'pghstore Documentation',
+     ['Hong Minhee'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -243,8 +243,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'pghstore', u'pghstore Documentation',
-   u'Hong Minhee', 'pghstore', 'One line description of project.',
+  ('index', 'pghstore', 'pghstore Documentation',
+   'Hong Minhee', 'pghstore', 'One line description of project.',
    'Miscellaneous'),
 ]
 

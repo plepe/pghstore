@@ -6,7 +6,7 @@ import cpghstore
 try:
     import pghstore
 except ImportError:
-    print "INFO: Could not import pghstore (have you done 'pip install pghstore'?)"
+    print("INFO: Could not import pghstore (have you done 'pip install pghstore'?)")
     pghstore = None
 
 from benchmark import timefunc
@@ -23,14 +23,14 @@ names = [cpghstore.loads(name) for name in names]
 class DumpsBenchmark(unittest.TestCase):
     def test_dumps(self):
         n = 10000
-        print ""
+        print("")
         for name in names:
             cpg_time = timefunc(cpghstore.dumps, n, name)
             if pghstore:
                 pg_time = timefunc(pghstore.dumps, n, name)
                 self.assertTrue(cpg_time < pg_time)
-                print ".. n=%i, dictlen=%i, cpghstore.dumps (%.2fs) is %ix faster than pghstore.dumps (%.2fs)" % (
-                    n, len(name), cpg_time, floor(pg_time / cpg_time), pg_time)
+                print(".. n=%i, dictlen=%i, cpghstore.dumps (%.2fs) is %ix faster than pghstore.dumps (%.2fs)" % (
+                    n, len(name), cpg_time, floor(pg_time / cpg_time), pg_time))
             else:
-                print ".. n=%i, dictlen=%i, cpghstore.dumps done in %.2fs" % (
-                    n, len(name), cpg_time)
+                print(".. n=%i, dictlen=%i, cpghstore.dumps done in %.2fs" % (
+                    n, len(name), cpg_time))
