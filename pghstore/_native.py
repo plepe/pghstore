@@ -86,8 +86,6 @@ def dumps(obj, key_map=None, value_map=None, encoding='utf-8',
     b = StringIO.StringIO()
     dump(obj, b, key_map=key_map, value_map=value_map, encoding=encoding)
     result = b.getvalue()
-    if return_unicode:
-        return result.decode(encoding)
     return result
 
 
@@ -243,16 +241,12 @@ def parse(string, encoding='utf-8'):
             key = unescape(kq)
         else:
             key = match.group('kb')
-        if isinstance(key, str):
-            key = key.decode(encoding)
         vq = match.group('vq')
         if vq:
             value = unescape(vq)
         else:
             vn = match.group('vn')
             value = None if vn else match.group('vb')
-        if isinstance(value, str):
-            value = value.decode(encoding)
         yield key, value
         offset = match.end()
     if offset > len(string) or string[offset:].strip():
