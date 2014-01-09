@@ -12,7 +12,7 @@ def dumps(obj, key_map=None, value_map=None, encoding='utf-8',
 
     .. sourcecode:: pycon
 
-       >>> dumps({u'a': u'1 "quotes"'})
+       >>> dumps({'a': '1 "quotes"'})
        '"a"=>"1 \\"quotes\\""'
        >>> dumps([('key', 'value'), ('k', 'v')])
        '"key"=>"value","k"=>"v"'
@@ -57,9 +57,9 @@ def dumps(obj, key_map=None, value_map=None, encoding='utf-8',
 
     .. sourcecode:: pycon
 
-       >>> dumps({'surname': u'\ud64d'})
+       >>> dumps({'surname': '\ud64d'})
        '"surname"=>"\xed\x99\x8d"'
-       >>> dumps({'surname': u'\ud64d'}, encoding='utf-32')
+       >>> dumps({'surname': '\ud64d'}, encoding='utf-32')
        '"surname"=>"\xff\xfe\x00\x00M\xd6\x00\x00"'
 
     If you set ``return_unicode`` to ``True``, it will return :class:`unicode`
@@ -67,8 +67,8 @@ def dumps(obj, key_map=None, value_map=None, encoding='utf-8',
 
     .. sourcecode:: pycon
 
-       >>> dumps({'surname': u'\ud64d'}, return_unicode=True)
-       u'"surname"=>"\ud64d"'
+       >>> dumps({'surname': '\ud64d'}, return_unicode=True)
+       '"surname"=>"\ud64d"'
 
     :param obj: a mapping object to dump
     :param key_map: an optional mapping function that takes a non-string key
@@ -95,7 +95,7 @@ def loads(string, encoding='utf-8', return_type=dict):
     .. sourcecode:: pycon
 
        >>> loads('a=>1')
-       {u'a': u'1'}
+       {'a': '1'}
 
     If you want to load a hstore value as any other type than :class:`dict`
     set ``return_type`` parameter.  Note that the constructor has to take
@@ -104,9 +104,9 @@ def loads(string, encoding='utf-8', return_type=dict):
     .. sourcecode:: pycon
 
        >>> loads('a=>1, b=>2', return_type=list)
-       [(u'a', u'1'), (u'b', u'2')]
+       [('a', '1'), ('b', '2')]
        >>> loads('"return_type"=>"tuple"', return_type=tuple)
-       ((u'return_type', u'tuple'),)
+       (('return_type', 'tuple'),)
 
     :param string: a hstore format string
     :type string: :class:`basestring`
@@ -128,7 +128,7 @@ def dump(obj, file, key_map=None, value_map=None, encoding='utf-8'):
 
        >>> import StringIO
        >>> f = StringIO.StringIO()
-       >>> dump({u'a': u'1'}, f)
+       >>> dump({'a': '1'}, f)
        >>> f.getvalue()
        '"a"=>"1"'
 
@@ -227,9 +227,9 @@ def parse(string, encoding='utf-8'):
     .. sourcecode:: pycon
 
        >>> list(parse('a=>1, b => 2, c => null, d => "NULL"'))
-       [(u'a', u'1'), (u'b', u'2'), (u'c', None), (u'd', u'NULL')]
+       [('a', '1'), ('b', '2'), ('c', None), ('d', 'NULL')]
        >>> list(parse(r'"a=>1"=>"\"b\"=>2",'))
-       [(u'a=>1', u'"b"=>2')]
+       [('a=>1', '"b"=>2')]
 
     """
     offset = 0
